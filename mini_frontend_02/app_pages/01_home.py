@@ -1,8 +1,12 @@
 import streamlit as st
-
+from core.auth import is_logged_in
 
 st.title("🏠 홈")
-st.info("Layout에 오신 것을 환영합니다.")
+
+if is_logged_in() == True:
+    st.info(f"{st.session_state.login_id} 로그인 상태입니다.")
+
+# st.info("Layout에 오신 것을 환영합니다.")
 
 col_visitors, col_logs, col_complete = st.columns(3)
 

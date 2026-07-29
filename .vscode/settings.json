@@ -4,6 +4,11 @@
             "path": "mini_frontend",
             "envManager": "ms-python.python:venv",
             "packageManager": "ms-python.python:pip"
+        },
+        {
+            "path": "mini_frontend_02",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
         }
     ]
 }

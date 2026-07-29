@@ -7,7 +7,7 @@ if not is_logged_in():
     st.title("LOGIN")
 
     with st.form("login_form"):
-        st.text_input("ID 입력", key="login_id")
+        st.text_input("ID 입력", key="login_id", value="id01")
         st.text_input("PWD 입력", type="password", key="login_pwd")
         st.form_submit_button("LOGIN", on_click=login)
 
