@@ -2,8 +2,8 @@ import httpx
 import streamlit as st
 
 
-# 물품 관련 API는 현재 정상 응답하는 서버 주소 하나만 사용합니다.
-API_BASE_URL = "http://127.0.0.1:8000"
+# 배포된 화면에서는 로컬 주소가 아닌 실제 백엔드 서버를 호출합니다.
+API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
 
 
 def show_api_error(response: httpx.Response) -> None:
@@ -76,7 +76,8 @@ def product_create() -> None:
             response = httpx.post(
                 f"{API_BASE_URL}/product/create",
                 json=payload,
-                timeout=15.0,
+                # 무료 서버가 잠든 경우 깨어나는 시간을 고려합니다.
+                timeout=60.0,
             )
     except httpx.RequestError:
         # 인터넷 연결 또는 서버 문제도 화면이 멈추지 않도록 처리합니다.
