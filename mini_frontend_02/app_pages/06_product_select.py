@@ -1,70 +1,107 @@
-
 import httpx
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
-API_BASE_URL = "https://zero2-mini-project-2.onrender.com"  # 프론트엔드가 호출할 백엔드 서버의 기본 주소를 한 곳에서 관리합니다.
+
+# 생성 화면과 같은 서버를 사용해야 등록한 물품을 바로 조회할 수 있습니다.
+API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
 
 
-@st.dialog("삭제")
-def show_del(p:dict) -> None:
-    st.info("Delete")
-    st.write(f"{p['name']}삭제 하시겠습니까")
-    if st.button("삭제"):
-        with st.spinner("삭제 진행"):
-            response = httpx.delete(f"{API_BASE_URL}/product/delete/{p['id']}", timeout= 10.0)
-        if response.status_code == 200:
-            st.rerun()
-
-@st.dialog("수정")
-def show_up(p:dict) -> None:
-    st.info(f"{p['id']}를 수정 하겠습니다.")
-    with st.form(f"form_{p['id']}"):
-        product_name = st.text_input("이름:", value=p["name"])
-        product_price = st.number_input("가격:", value=int(p["price"]))
-        if st.form_submit_button("수정"):
-            payload = {"name":product_name, "price":product_price}
-            with st.spinner("데이터 요청"):
-                response = httpx.put(f"{API_BASE_URL}/product/update/{p['id']}",json=payload, timeout= 10.0)
-            if response.status_code == 200:
-                st.rerun()
-
+def load_products() -> list[dict]:
+    """서버에서 전체 물품 목록을 받아옵니다."""
+    response = httpx.get(
+        f"{API_BASE_URL}/product/getall",
+        timeout=15.0,
+    )
+    response.raise_for_status()
+    return response.json()
 
 
 def product_select() -> None:
-    """데이터를 확인합니다."""
+    """물품 목록을 검색하고 정렬해서 보여주는 화면입니다."""
+    st.title("🔎 물품 조회")
+    st.caption("등록된 물품을 이름 또는 ID로 빠르게 찾아보세요.")
 
-    st.subheader("Product 조회")
-    st.caption("product 테이블을 선택하고 데이터를 확인합니다.")
+    try:
+        with st.spinner("물품 목록을 불러오고 있습니다..."):
+            products = load_products()
+    except (httpx.RequestError, httpx.HTTPStatusError, ValueError):
+        # 서버 연결 실패와 잘못된 응답을 한 곳에서 간단히 안내합니다.
+        st.error("물품 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.")
+        if st.button("다시 불러오기", type="primary"):
+            st.rerun()
+        return
 
-    with st.spinner("데이터 요청"):
-        response = httpx.get(f"{API_BASE_URL}/product/getall", timeout= 10.0)
+    if not products:
+        st.info("등록된 물품이 없습니다. 먼저 물품을 등록해 주세요.")
+        st.page_link(
+            "app_pages/05_product_create.py",
+            label="첫 물품 등록하기",
+            icon="📦",
+        )
+        return
 
-    if response.status_code == 200:
-        result = response.json()
+    # 목록 위쪽에서 전체 현황을 한눈에 확인할 수 있습니다.
+    total_price = sum(float(product["price"]) for product in products)
+    metric_count, metric_average, metric_total = st.columns(3)
+    metric_count.metric("전체 물품", f"{len(products)}개")
+    metric_average.metric("평균 가격", f"{total_price / len(products):,.0f}원")
+    metric_total.metric("가격 합계", f"{total_price:,.0f}원")
 
+    search_col, sort_col, refresh_col = st.columns([2, 1, 1])
+    with search_col:
+        keyword = st.text_input(
+            "검색",
+            placeholder="물품명 또는 ID 입력",
+            label_visibility="collapsed",
+        )
+    with sort_col:
+        sort_option = st.selectbox(
+            "정렬",
+            ["ID 순", "낮은 가격순", "높은 가격순", "이름순"],
+            label_visibility="collapsed",
+        )
+    with refresh_col:
+        if st.button("새로고침", use_container_width=True):
+            st.rerun()
 
-        if not result:
-            st.info("Product 가 없습니다.")
-        for p in result:
-            with st.container(border=True):
-                col1,col2,col3,col4 = st.columns(4)
-                with col1:
-                    st.write(p["id"])
-                with col2:    
-                    st.write(p["name"])
-                with col3:
-                    st.write(f"{p['price']}원")
-                with col4:
-                    if st.button("삭제", key=f"del_{p['id']}"):
-                        show_del(p)
-                    if st.button("수정", key=f"up_{p['id']}"):
-                        show_up(p)
+    # 검색어는 대소문자를 구분하지 않으며 ID 검색도 함께 지원합니다.
+    clean_keyword = keyword.strip().lower()
+    filtered_products = [
+        product
+        for product in products
+        if clean_keyword in str(product["id"]).lower()
+        or clean_keyword in str(product["name"]).lower()
+    ]
 
+    sort_rules = {
+        "ID 순": lambda product: product["id"],
+        "낮은 가격순": lambda product: float(product["price"]),
+        "높은 가격순": lambda product: -float(product["price"]),
+        "이름순": lambda product: str(product["name"]),
+    }
+    filtered_products.sort(key=sort_rules[sort_option])
 
-    else: 
-        st.warning("Fail")
+    st.caption(f"검색 결과 {len(filtered_products)}개")
 
-    
+    if not filtered_products:
+        st.warning("검색 조건에 맞는 물품이 없습니다.")
+        return
+
+    # 표에 표시할 열 이름과 가격 형식을 사용자가 읽기 쉽게 바꿉니다.
+    table = pd.DataFrame(filtered_products)[["id", "name", "price"]]
+    table.columns = ["ID", "물품명", "가격"]
+
+    st.dataframe(
+        table,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "ID": st.column_config.NumberColumn("ID", format="%d"),
+            "물품명": st.column_config.TextColumn("물품명"),
+            "가격": st.column_config.NumberColumn("가격", format="%d원"),
+        },
+    )
+
 
 product_select()
