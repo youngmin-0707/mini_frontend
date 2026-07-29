@@ -3,7 +3,7 @@ import streamlit as st
 
 
 # 물품 관련 API는 현재 정상 응답하는 서버 주소 하나만 사용합니다.
-API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
+API_BASE_URL = "http://127.0.0.1:8000"
 
 
 def show_api_error(response: httpx.Response) -> None:

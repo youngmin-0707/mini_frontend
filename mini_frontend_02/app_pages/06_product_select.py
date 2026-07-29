@@ -4,7 +4,7 @@ import streamlit as st
 
 
 # 생성 화면과 같은 서버를 사용해야 등록한 물품을 바로 조회할 수 있습니다.
-API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
+API_BASE_URL = "http://127.0.0.1:8000"
 
 
 def load_products() -> list[dict]:
