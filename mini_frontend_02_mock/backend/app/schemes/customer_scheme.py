@@ -20,12 +20,6 @@ class CustomerUpdate(BaseModel):
     age: int = Field(ge=0, le=150)
 
 
-class CustomerStored(CustomerCreate):
-    """JSON 파일에 실제로 저장되는 데이터입니다."""
-
-    timestamp: str
-
-
 class CustomerPublic(BaseModel):
     """화면에 보여 줄 고객 데이터입니다. 비밀번호는 포함하지 않습니다."""
 
@@ -33,27 +27,3 @@ class CustomerPublic(BaseModel):
     name: str
     age: int
     timestamp: str
-
-
-class CustomerCreateResponse(BaseModel):
-    message: str
-    customer: CustomerPublic
-
-
-class CustomerGetResponse(BaseModel):
-    customer: CustomerPublic
-
-
-class CustomerListResponse(BaseModel):
-    count: int
-    customers: list[CustomerPublic]
-
-
-class CustomerUpdateResponse(BaseModel):
-    message: str
-    updated_customer: CustomerPublic
-
-
-class CustomerDeleteResponse(BaseModel):
-    message: str
-    deleted_id: str
