@@ -41,8 +41,8 @@ signup_page = st.Page("app_pages/02_signup.py", title="회원가입", icon="📝
 weather_page = st.Page("app_pages/03_weather.py", title="날씨조회", icon="📝")
 health_page = st.Page("app_pages/04_health.py", title="서버체크", icon="📝")
 
-product_select_page = st.Page("app_pages/product_select.py", title="Product 조회", icon="📝")
-product_create_page = st.Page("app_pages/product_create.py", title="Product 입력", icon="📝")
+product_select_page = st.Page("app_pages/06_product_select.py", title="Product 조회", icon="📝")
+product_create_page = st.Page("app_pages/05_product_create.py", title="Product 입력", icon="📝")
 
 if st.session_state.loginout == "login":
     pages = [
