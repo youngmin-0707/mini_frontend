@@ -43,13 +43,17 @@ health_page = st.Page("app_pages/04_health.py", title="서버체크", icon="📝
 
 product_select_page = st.Page("app_pages/06_product_select.py", title="Product 조회", icon="📝")
 product_create_page = st.Page("app_pages/05_product_create.py", title="Product 입력", icon="📝")
+customer_create_page = st.Page("app_pages/07_customer_create.py", title="Customer 입력", icon="📝")
+customer_select_page = st.Page("app_pages/08_customer_select.py", title="Customer 조회", icon="📝")
 
 if st.session_state.loginout == "login":
     pages = [
         home_page,
         weather_page,
         product_select_page,
-        product_create_page
+        product_create_page,
+        customer_create_page,
+        customer_select_page,
     ]
 else:
     pages = [home_page, login_page, signup_page, health_page]
@@ -65,6 +69,8 @@ with st.sidebar:
         st.page_link(weather_page)
         st.page_link(product_select_page)
         st.page_link(product_create_page)
+        st.page_link(customer_create_page)
+        st.page_link(customer_select_page)
     else:
         st.page_link(login_page)
         st.page_link(signup_page)

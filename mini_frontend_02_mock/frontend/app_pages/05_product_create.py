@@ -1,4 +1,4 @@
-# 04_health.py
+
 
 import streamlit as st
 from clients.product_client import product_insert

@@ -6,7 +6,8 @@ from typing import Any
 import httpx
 
 
-BACKEND_URL= "https://mini-frontend-mock.onrender.com"
+# BACKEND_URL= "https://mini-frontend-mock.onrender.com"(배포모드)
+BACKEND_URL= "http://127.0.0.1:8000"
 REQUEST_TIMEOUT = 15.0
 
 
@@ -33,5 +34,13 @@ def request(method: str,path: str,json: dict[str, Any] | None = None,):
         payload = response.json()
     except ValueError as error:
         raise BackendAPIError("백엔드가 올바른 JSON을 반환하지 않았습니다.") from error
-    
+
+    # 400번대와 500번대 응답은 화면에서 오류 메시지로 보여 줍니다.
+    if response.is_error:
+        if isinstance(payload, dict):
+            message = payload.get("detail", "백엔드 요청에 실패했습니다.")
+        else:
+            message = "백엔드 요청에 실패했습니다."
+        raise BackendAPIError(str(message))
+
     return payload
