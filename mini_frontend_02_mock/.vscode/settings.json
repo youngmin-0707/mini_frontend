@@ -6,11 +6,6 @@
             "packageManager": "ms-python.python:pip"
         },
         {
-            "path": "frontend",
-            "envManager": "ms-python.python:venv",
-            "packageManager": "ms-python.python:pip"
-        },
-        {
             "path": "frontend_tab",
             "envManager": "ms-python.python:venv",
             "packageManager": "ms-python.python:pip"
