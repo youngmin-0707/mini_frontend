@@ -43,7 +43,7 @@ if select_all:
         with st.spinner("Customer 목록을 조회하고 있습니다."):
             result = customer_select_all()
 
-        st.info(f"전체 Customer 수: {result['count']}")
+        st.info(f"전체고객수: {result['count']}")
         if not result["customers"]:
             st.info("등록된 Customer가 없습니다.")
         else:
