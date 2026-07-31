@@ -1,0 +1,133 @@
+INFO:     Started server process [108364]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+PermissionError: [WinError 10013] 액세스 권한에 의해 숨겨진 소켓에 액세스를 시도했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1106, in _validate_conn
+    conn.connect()
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPSConnection(host='generativelanguage.googleapis.com', port=443): Failed to establish a new connection: [WinError 10013] 액세스 권한에 의해 숨겨진 소켓에 액세스를 시도했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\urllib3\util\retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3.5-flash:generateContent (Caused by NewConnectionError("HTTPSConnection(host='generativelanguage.googleapis.com', port=443): Failed to establish a new connection: [WinError 10013] 액세스 권한에 의해 숨겨진 소켓에 액세스를 시도했습니다"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\anyio\to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2641, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1033, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\mini\02_mini_project\app\routers\chat_router.py", line 11, in chat_gemini
+    return call_gemini(chat_request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\mini\02_mini_project\app\services\chat_service.py", line 12, in call_gemini
+    response = client.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\google\genai\models.py", line 4672, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\google\genai\models.py", line 3831, in _generate_content
+    response_dict = self._api_client.request(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\google\genai\_api_client.py", line 455, in request
+    response = self._request(http_request, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\google\genai\_api_client.py", line 390, in _request
+    return self._request_unauthorized(http_request, stream)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\google\genai\_api_client.py", line 405, in _request_unauthorized
+    response = http_session.request(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aidevs\03_supabase-ai-frontend\.venv\Lib\site-packages\requests\adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3.5-flash:generateContent (Caused by NewConnectionError("HTTPSConnection(host='generativelanguage.googleapis.com', port=443): Failed to establish a new connection: [WinError 10013] 액세스 권한에 의해 숨겨진 소켓에 액세스를 시도했습니다"))
