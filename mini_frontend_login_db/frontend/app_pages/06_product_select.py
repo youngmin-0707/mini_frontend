@@ -5,7 +5,7 @@ import streamlit as st
 
 # 생성 화면과 같은 실제 백엔드 서버를 사용합니다.
 # 상품 API 요청에 공통으로 사용할 백엔드 주소입니다.
-API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
+# API_BASE_URL = "https://zero2-mini-project-2.onrender.com"
 
 
 def load_products() -> list[dict]:

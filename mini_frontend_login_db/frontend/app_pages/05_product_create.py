@@ -4,7 +4,7 @@ import streamlit as st
 
 
 # 로컬 FastAPI 상품 API 주소
-API_BASE_URL = "http://127.0.0.1:8001"
+API_BASE_URL = "https://mini-frontend-login-db-7afb.onrender.com"
 
 
 def show_api_error(response: httpx.Response) -> None:

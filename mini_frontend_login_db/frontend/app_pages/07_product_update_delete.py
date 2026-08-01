@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 
-API_BASE_URL = "http://127.0.0.1:8001"
+API_BASE_URL = "https://mini-frontend-login-db-7afb.onrender.com"
 
 
 def load_products() -> list[dict]:
