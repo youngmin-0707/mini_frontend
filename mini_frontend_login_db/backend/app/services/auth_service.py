@@ -6,7 +6,6 @@ from app.schemas.auth import AuthCreate, AuthLogin, AuthPublic
 def sign_up_process(auth: AuthCreate):
     """ 회원 가입 """
     supabase = get_supabase()
-    db_customer = _customer_get(auth.id)
     if db_customer is not None:
         raise HTTPException(
             status_code=409,
