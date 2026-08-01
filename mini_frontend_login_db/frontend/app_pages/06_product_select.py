@@ -1,3 +1,9 @@
+"""백엔드의 상품 목록을 검색·정렬해 표로 보여 주는 조회 페이지입니다.
+
+`load_products()`는 HTTP 통신을, `product_select()`는 화면 표시를 담당합니다.
+역할을 나누면 코드를 읽고 테스트하기 쉬워집니다.
+"""
+
 import httpx
 import pandas as pd
 import streamlit as st

@@ -1,4 +1,8 @@
-# 04_health.py
+"""FastAPI 백엔드에 연결할 수 있는지 확인하는 학습용 페이지입니다.
+
+httpx 요청이 성공하면 서버 응답을 보여 주고, 연결에 실패하면
+사용자가 백엔드 실행 상태를 확인하도록 안내합니다.
+"""
 
 import httpx  # FastAPI 같은 백엔드 API에 HTTP 요청을 보내기 위해 httpx 클라이언트를 가져옵니다.
 import streamlit as st  # Python 코드로 웹 화면을 만들기 위해 Streamlit을 st라는 별칭으로 가져옵니다.

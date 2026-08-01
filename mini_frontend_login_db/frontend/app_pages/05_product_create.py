@@ -1,9 +1,15 @@
+"""상품을 등록하고 전체 목록을 검색·정렬해 보여 주는 Streamlit 페이지입니다.
+
+상품 생성은 POST, 전체 조회는 GET 요청을 사용합니다.
+받은 JSON 목록은 pandas DataFrame으로 변환해 Streamlit 표로 표시합니다.
+"""
+
 import httpx
 import pandas as pd
 import streamlit as st
 
 
-# 로컬 FastAPI 상품 API 주소
+# 상품 API 요청에 공통으로 사용할 FastAPI 기본 주소입니다.
 API_BASE_URL = "https://mini-frontend-login-db-7afb.onrender.com"
 
 

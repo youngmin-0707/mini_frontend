@@ -1,3 +1,5 @@
+"""로그인 여부와 현재 사용자를 보여 주는 간단한 홈 페이지입니다."""
+
 import streamlit as st
 from core.auth import is_logged_in
 

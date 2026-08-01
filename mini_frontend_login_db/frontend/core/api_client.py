@@ -1,4 +1,8 @@
-"""모든 메뉴 API에서 공통으로 사용하는 HTTP 요청 기능."""
+"""모든 메뉴 API에서 공통으로 사용하는 HTTP 요청 기능입니다.
+
+각 화면에서 httpx 코드를 반복하지 않도록 URL 조합, 타임아웃,
+연결 오류, HTTP 상태 코드, JSON 변환을 이 파일 한 곳에서 처리합니다.
+"""
 
 import os
 from typing import Any
@@ -17,6 +21,8 @@ class BackendAPIError(Exception):
 
 
 def request(method: str, path: str, json: dict[str, Any] | None = None):
+    """HTTP 요청을 보내고 JSON을 반환하며, 실패는 BackendAPIError로 통일합니다."""
+    # 네트워크 요청 자체가 실패하는 경우를 먼저 분리해 처리합니다.
     try:
         response = httpx.request(
             method,

@@ -1,4 +1,8 @@
-# 01_current-weather.py
+"""Open-Meteo API에서 현재 날씨를 받아 보여 주는 Streamlit 페이지입니다.
+
+우리 FastAPI가 아닌 외부 API를 httpx로 직접 호출하며,
+URL 파라미터·JSON 응답·예외 처리 흐름을 보여 주는 예제입니다.
+"""
 
 import httpx
 import streamlit as st

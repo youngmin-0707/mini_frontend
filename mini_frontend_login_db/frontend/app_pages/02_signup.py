@@ -1,3 +1,9 @@
+"""새 회원 정보를 받아 FastAPI 회원가입 API로 보내는 페이지입니다.
+
+흐름은 `입력 폼 → register_process() → request() → /auth/create`입니다.
+네트워크나 백엔드 오류는 `BackendAPIError`로 받아 화면에 안내합니다.
+"""
+
 import streamlit as st
 from app_pages.clients.auth_client import register_process
 from core.api_client import BackendAPIError
@@ -5,6 +11,7 @@ from core.api_client import BackendAPIError
 
 
 def init_state():
+    """회원가입 완료 여부를 세션에 처음 한 번만 만듭니다."""
     if "register_ok" not in st.session_state:
         st.session_state.register_ok = False
     if "register_name" not in st.session_state:

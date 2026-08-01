@@ -1,8 +1,15 @@
+"""목록에서 선택한 상품을 수정하거나 삭제하는 Streamlit 페이지입니다.
+
+상품 선택은 DataFrame 행 선택을, 수정·삭제 확인은 `st.dialog`를 사용합니다.
+성공 메시지는 재실행 후에도 보이도록 session_state에 임시로 저장합니다.
+"""
+
 import httpx
 import pandas as pd
 import streamlit as st
 
 
+# 수정(PUT)과 삭제(DELETE) 요청을 보낼 Render 백엔드 주소입니다.
 API_BASE_URL = "https://mini-frontend-login-db-7afb.onrender.com"
 
 

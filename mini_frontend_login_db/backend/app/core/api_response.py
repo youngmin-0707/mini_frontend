@@ -1,3 +1,9 @@
+"""API가 공통으로 반환할 응답 모양을 정의합니다.
+
+라우터마다 서로 다른 JSON 형식을 만들지 않고
+`success`, `message`, `data`라는 같은 키를 사용하도록 돕는 Pydantic 모델입니다.
+"""
+
 from typing import Any
 
 from pydantic import BaseModel, Field

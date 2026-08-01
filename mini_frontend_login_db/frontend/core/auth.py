@@ -11,6 +11,7 @@ def init_state(
     stored_login_id: str = "",
     stored_login_name: str = "",
 ) -> None:
+    """로그인 관련 세션 키가 없을 때만 기본값을 설정합니다."""
     st.session_state.setdefault("loginout", stored_loginout)
     st.session_state.setdefault("login_id", stored_login_id)
     st.session_state.setdefault("login_name", stored_login_name)
@@ -18,6 +19,7 @@ def init_state(
 # Login with Fronend
 # 현재는 학습용 고정 ID와 비밀번호를 비교해 로그인 상태를 변경합니다.
 def login(login_id:str, login_pwd:str) -> None:
+    """현재는 학습용 고정 계정을 비교해 로그인 세션을 만듭니다."""
     if login_id == "id01" and login_pwd == "pwd01":
         st.session_state.loginout = "login"
         st.session_state.login_id = login_id
@@ -29,6 +31,7 @@ def login(login_id:str, login_pwd:str) -> None:
 
 # 세션에 저장된 로그인 정보를 빈 값으로 되돌립니다.
 def logout() -> None:
+    """세션의 인증 정보를 비워 비로그인 상태로 돌립니다."""
     st.session_state.loginout = "logout"
     st.session_state.login_id = ""
     st.session_state.login_pwd = ""
@@ -58,5 +61,6 @@ def logout() -> None:
 
 # 다른 페이지에서 현재 로그인 여부를 간단히 확인하도록 True/False를 반환합니다.
 def is_logged_in() -> bool:
+    """현재 세션이 로그인 상태인지 True/False로 알려 줍니다."""
     return st.session_state.loginout == "login" 
         

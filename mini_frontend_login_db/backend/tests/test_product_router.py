@@ -1,3 +1,9 @@
+"""상품 CRUD 라우터의 HTTP 응답을 검사하는 테스트입니다.
+
+Supabase에 직접 접속하지 않고 monkeypatch로 서비스 함수를 교체합니다.
+그러면 DB 상태와 관계없이 라우터의 URL·상태 코드·JSON 형식만 검증할 수 있습니다.
+"""
+
 from datetime import datetime
 
 from fastapi.testclient import TestClient
@@ -11,6 +17,7 @@ client = TestClient(app)
 
 
 def make_product(product_id: str = "product-1") -> ProductPublic:
+    """여러 테스트가 공통으로 사용할 가짜 상품을 만듭니다."""
     return ProductPublic(
         id=product_id,
         name="바지",
